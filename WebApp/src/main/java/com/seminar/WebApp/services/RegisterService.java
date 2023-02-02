@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
 
-import com.seminar.WebApp.entities.UserForm;
+import com.seminar.WebApp.entities.User;
 
 
 @Service
@@ -20,16 +20,15 @@ public class RegisterService {
 
     public String register(Model model)
     {
-        UserForm userForm = new UserForm();
+        User userForm = new User();
         model.addAttribute("userForm",userForm);
         return "register";
     }
 
-    public String registerSuccess(UserForm userForm)
+    public String registerSuccess(User userForm)
     {
         userForm.setPassword(passwordEncoder.encode(userForm.getPassword()));
-        restTemplate.postForObject("http://localhost:8080/users", userForm,UserForm.class);
-
+        restTemplate.postForObject("http://localhost:8080/users", userForm,User.class);
         return "index";
     }
 

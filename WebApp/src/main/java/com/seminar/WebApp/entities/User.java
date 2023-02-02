@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserForm {
+public class User {
 
     private String firstName;
     private String lastName;

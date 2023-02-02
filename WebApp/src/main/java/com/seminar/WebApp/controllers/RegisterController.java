@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.seminar.WebApp.entities.UserForm;
+import com.seminar.WebApp.entities.User;
 import com.seminar.WebApp.services.RegisterService;
 
 
@@ -25,7 +25,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register/success")
-    public String registerSucess(@ModelAttribute UserForm userForm)
+    public String registerSucess(@ModelAttribute User userForm)
     {
         return service.registerSuccess(userForm);
     }

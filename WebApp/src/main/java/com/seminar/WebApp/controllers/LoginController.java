@@ -1,17 +1,20 @@
 package com.seminar.WebApp.controllers;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 @Controller
-public class IndexController {
+public class LoginController {
     
-    @GetMapping("")
-    public String index()
+    // @GetMapping("/login")
+    // public String login()
+    // {
+    //     return "login";
+    // }
+
+    @GetMapping("/login/success")
+    public String loginSuccess()
     {
         return "index";
     }
-
 }
