@@ -16,6 +16,11 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -23,7 +28,7 @@ public class SecurityConfig {
         .requestMatchers("/","/register","/register/success")
         .permitAll()
         .anyRequest().authenticated())
-        .formLogin((form) -> form.permitAll())
+        .formLogin((form) -> form.permitAll().successHandler(customAuthenticationSuccessHandler))
         // .loginPage("/login").permitAll())
         // .logout((logout) -> logout.permitAll())
         .userDetailsService(userDetailsService);

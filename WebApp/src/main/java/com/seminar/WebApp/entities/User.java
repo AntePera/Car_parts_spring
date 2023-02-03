@@ -1,5 +1,6 @@
 package com.seminar.WebApp.entities;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,12 @@ public class User {
     private String email;
     private String password;
     private String role;
+
+    public boolean hasRole(String roleName) {
+        if (this.role.equals(roleName)) {
+            return true;
+        } 
+        return false;
+        }
     
-}
+    }

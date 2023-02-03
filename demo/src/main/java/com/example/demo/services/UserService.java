@@ -29,4 +29,9 @@ public class UserService {
     {
         return repository.save(user);
     }
+
+    public Users getByEmail(String email)
+    {
+        return repository.getByEmail(email).get();
+    }
 }
