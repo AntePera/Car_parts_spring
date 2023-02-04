@@ -3,11 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="js/admin.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin dashboard</title>
 </head>
 <body>
-    <h1>Admin template</h1>
+    <h1>Admin dashboard</h1>
+    <a href="/">Go back</a>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Cars')">Cars</button>
+        <button class="tablinks" onclick="openTab(event, 'Issues')">Issues</button>
+        <button class="tablinks" onclick="openTab(event, 'Parts')">Parts</button>
+    </div>
+
+
+
+    <div id="Cars" class="tabcontent">
+        <h3>Add new car</h3>
+        <form method="post" th:action="@{/admin/carAdded}" th:object="${car}">
+            <label for="manufacturer">Manufacturer:</label>
+            <input type="text" id="manufacturer" name="manufacturer" th:value="*{manufacturer}" required/><br>
     
+            <label for="model">Model:</label>
+            <input type="text" id="model" name="model" th:value="*{model}" required/><br>
+    
+            <label for="domesticMarket">Domestic Market:</label>
+            <input type="text" id="domesticMarket" name="domesticMarket" th:value="*{domesticMarket}" required/><br>
+    
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" th:value="*{year}" required/><br>
+    
+            <input type="Submit" name="Submit">
+        </form>
+        <h3 class="align-middle">Car list</h3>
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Domestic Market</th>
+            <th>Year</th>
+        </tr>
+        <tr th:each="car : ${cars}">
+            <td class="align-middle" th:text="${car.id}"></td>
+            <td class="align-middle" th:text="${car.manufacturer}"></td>
+            <td class="align-middle" th:text="${car.model}"></td>
+            <td class="align-middle" th:text="${car.domesticMarket}"></td>
+            <td class="align-middle" th:text="${car.year}"></td>
+        </tr>
+        </table>
+    </div>
+      
+
+    
+    <div id="Issues" class="tabcontent">
+        <h3>Add new issue</h3>
+        <form method="post" th:action="@{/admin/issueAdded}" th:object="${issue}">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" th:value="*{description}" required/><br>
+    
+            <label for="solution">Solution:</label>
+            <input type="text" id="solution" name="solution" th:value="*{solution}" required/><br>
+    
+            <input type="Submit" name="Submit">
+        </form>
+        <h3 class="align-middle">Issue list</h3>
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Solution</th>
+        </tr>
+        <tr th:each="issue : ${issues}">
+            <td class="align-middle" th:text="${issue.id}"></td>
+            <td class="align-middle" th:text="${issue.description}"></td>
+            <td class="align-middle" th:text="${issue.solution}"></td>
+        </tr>
+        </table>
+    </div>
+
+
+
+    <div id="Parts" class="tabcontent">
+        <h3>Add new part</h3>
+        <form method="post" th:action="@{/admin/partAdded}" th:object="${part}">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:value="*{name}" required/><br>
+    
+            <label for="domesticMarket">Domestic Market:</label>
+            <input type="text" id="domesticMarket" name="domesticMarket" th:value="*{domesticMarket}" required/><br>
+
+            <label for="partDescription">Part Description:</label>
+            <input type="text" id="partDescription" name="partDescription" th:value="*{partDescription}" required/><br>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" th:value="*{price}" required/><br>
+    
+            <input type="Submit" name="Submit">
+        </form>
+        <h3 class="align-middle">Issue list</h3>
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Domestic Market</th>
+            <th>Part description</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="part : ${parts}">
+            <td class="align-middle" th:text="${part.id}"></td>
+            <td class="align-middle" th:text="${part.name}"></td>
+            <td class="align-middle" th:text="${part.domesticMarket}"></td>
+            <td class="align-middle" th:text="${part.partDescription}"></td>
+            <td class="align-middle" th:text="${part.price}"></td>
+        </tr>
+    </div>
+      
+
+
+
 </body>
 </html>
