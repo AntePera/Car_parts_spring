@@ -12,6 +12,7 @@ public class Part {
     private String name;
     private String domesticMarket;
     private String partDescription;
+
     private double price;
     
 }

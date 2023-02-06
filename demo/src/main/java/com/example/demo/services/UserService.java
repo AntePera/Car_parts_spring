@@ -34,4 +34,7 @@ public class UserService {
     {
         return repository.getByEmail(email).get();
     }
+    public void delete (int id){
+        repository.deleteById(id);
+    }
 }
