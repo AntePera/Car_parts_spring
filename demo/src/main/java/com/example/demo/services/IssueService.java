@@ -15,6 +15,7 @@ public class IssueService {
     @Autowired
     IssueRepository repository;
 
+
     public List<Issues> getAll()
     {
         return repository.findAll();

@@ -15,6 +15,7 @@ public class PartService {
     @Autowired
     PartRepository repository;
 
+
     public List<Parts> getAll()
     {
         return repository.findAll();

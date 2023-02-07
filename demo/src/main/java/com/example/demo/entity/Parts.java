@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,10 +28,10 @@ public class Parts {
     @OneToMany(targetEntity = Cars.class,cascade = CascadeType.ALL)
     @JoinColumn(name="pc_fk",referencedColumnName = "id")
     private List<Cars> carsList;
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name="parts_issues",
-                joinColumns =@JoinColumn(name = "partId"),
-                inverseJoinColumns =@JoinColumn(name = "issueId"))
+                joinColumns =@JoinColumn(name = "part_id"),
+                inverseJoinColumns =@JoinColumn(name = "issue_id"))
     private Set<Issues>setParts=new HashSet<>();
 
 }

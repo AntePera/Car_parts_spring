@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.seminar.WebApp.entities.User;
 
@@ -25,11 +26,17 @@ public class RegisterService {
         return "register";
     }
 
-    public String registerSuccess(User userForm)
+    public RedirectView registerSuccess(User userForm)
     {
         userForm.setPassword(passwordEncoder.encode(userForm.getPassword()));
-        restTemplate.postForObject("http://localhost:8080/users", userForm,User.class);
-        return "index";
+        try{
+            restTemplate.postForObject("http://localhost:8080/users", userForm,User.class);
+        }catch(Exception e)
+        {
+                return new RedirectView("/register?error");
+
+        }
+        return new RedirectView("/index");
     }
 
 }

@@ -53,7 +53,7 @@ public class ImageController {
                 File saveFile = new ClassPathResource("static/img").getFile();
 
                 Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + img.getOriginalFilename());
-                // System.out.println(path);
+                System.out.println(path);
                 Files.copy(img.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
             } catch (Exception e) {

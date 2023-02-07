@@ -14,10 +14,10 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private String role;
+    private Role role;
 
     public boolean hasRole(String roleName) {
-        if (this.role.equals(roleName)) {
+        if (this.role.name().equals(roleName)) {
             return true;
         } 
         return false;

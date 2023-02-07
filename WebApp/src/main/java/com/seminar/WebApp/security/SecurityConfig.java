@@ -24,14 +24,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        .authorizeHttpRequests((requests) -> requests
-        .requestMatchers("/","/register","/register/success")
-        .permitAll()
-        .anyRequest().authenticated())
-        .formLogin((form) -> form.permitAll().successHandler(customAuthenticationSuccessHandler))
-        // .loginPage("/login").permitAll())
-        // .logout((logout) -> logout.permitAll())
-        .userDetailsService(userDetailsService);
+        .authorizeHttpRequests().requestMatchers("/","/register","/register/success").permitAll()
+        .anyRequest().authenticated().and()
+            .formLogin()
+                .loginPage("/login").successHandler(customAuthenticationSuccessHandler)
+                .permitAll()
+                .and()
+            .logout()                                    
+                .permitAll().and().userDetailsService(userDetailsService);
         return http.build();
     }
 
