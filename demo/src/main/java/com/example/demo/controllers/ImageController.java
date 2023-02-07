@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import com.example.demo.entity.Image;
@@ -32,8 +34,13 @@ public class ImageController {
     public String index(Model m) {
 
         List<Image> list = uploadRepo.findAll();
+        List<String> images = new ArrayList<>();
+        for (Image i : list) {
+            images.add(Base64.getEncoder().encodeToString(i.getData()));
+        }
 
         m.addAttribute("list", list);
+        m.addAttribute("images", images);
 
         return "index";
     }

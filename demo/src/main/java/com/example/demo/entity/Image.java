@@ -12,4 +12,6 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @Lob
+    private byte[] data;
     }
