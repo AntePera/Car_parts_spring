@@ -6,8 +6,10 @@ import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Data
+
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,6 +21,7 @@ public class Issues {
     private int id;
     private String description;
     private String solution;
-    @ManyToMany(mappedBy = "setParts")
-    private Set<Parts> assignedIssues=new HashSet<>();
+    @ManyToMany(mappedBy = "issues")
+    @JsonIgnore
+    private Set<Parts> parts=new HashSet<>();
 }

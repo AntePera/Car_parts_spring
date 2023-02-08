@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Data
 @AllArgsConstructor
@@ -28,10 +30,36 @@ public class Parts {
     @OneToMany(targetEntity = Cars.class,cascade = CascadeType.ALL)
     @JoinColumn(name="pc_fk",referencedColumnName = "id")
     private List<Cars> carsList;
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name="parts_issues",
                 joinColumns =@JoinColumn(name = "part_id"),
                 inverseJoinColumns =@JoinColumn(name = "issue_id"))
-    private Set<Issues>setParts=new HashSet<>();
+    @JsonIgnore
+    private Set<Issues>issues=new HashSet<>();
+
+    public void addIssue(Issues issue)
+    {
+        issues.forEach(i -> {
+            if(i.getId() == issue.getId())
+            {
+                throw new EntityExistsException("Issue is already added");
+            }
+        });
+        issues.add(issue);
+        issue.getParts().add(this);
+    }
+
+    public void addCar(Cars car)
+    {
+        carsList.forEach(c -> {
+            if(c.getId() == car.getId())
+            {
+                throw new EntityExistsException("Car is already added");
+            }
+        });
+        carsList.add(car);
+    }
 
 }
+
+

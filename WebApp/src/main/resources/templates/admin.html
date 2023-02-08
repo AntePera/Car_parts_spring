@@ -16,6 +16,7 @@
         <button class="tablinks" onclick="openTab(event, 'Cars')">Cars</button>
         <button class="tablinks" onclick="openTab(event, 'Issues')">Issues</button>
         <button class="tablinks" onclick="openTab(event, 'Parts')">Parts</button>
+        <button class="tablinks" onclick="openTab(event, 'AddIssues')">Add issues to parts</button>
     </div>
 
 
@@ -40,14 +41,14 @@
         <h3 class="align-middle">Car list</h3>
         <table>
         <tr>
-
+            <th>ID</th>
             <th>Manufacturer</th>
             <th>Model</th>
             <th>Domestic Market</th>
             <th>Year</th>
         </tr>
         <tr th:each="car : ${cars}">
-
+            <td class="align-middle" th:text="${car.id}"></td>
             <td class="align-middle" th:text="${car.manufacturer}"></td>
             <td class="align-middle" th:text="${car.model}"></td>
             <td class="align-middle" th:text="${car.domesticMarket}"></td>
@@ -73,10 +74,12 @@
         <h3 class="align-middle">Issue list</h3>
         <table>
         <tr>
+            <th>ID</th>
             <th>Description</th>
             <th>Solution</th>
         </tr>
         <tr th:each="issue : ${issues}">
+            <td class="align-middle" th:text="${issue.id}"></td>
             <td class="align-middle" th:text="${issue.description}"></td>
             <td class="align-middle" th:text="${issue.solution}"></td>
         </tr>
@@ -105,37 +108,39 @@
         </form>
         <h3 class="align-middle">Issue list</h3>
         <table>
-        <tr>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Domestic Market</th>
+                <th>Image</th>
+                <th>Part description</th>
+                <th>Price</th> 
+                
+            </tr>
+            <tr th:each="part : ${parts}">
+                <td class="align-middle" th:text="${part.id}"></td>
+                <td class="align-middle" th:text="${part.name}"></td>
+                <td class="align-middle" th:text="${part.domesticMarket}"></td>
+                <td class="align-middle" th:text="${part.partDescription}"></td>
+                <td class="align-middle" th:text="${part.price}"></td>
+            </tr>
+        </table>
+    </div>
 
-            <th>Name</th>
-            <th>Domestic Market</th>
-            <th>Image</th>
-            <th>Part description</th>
-            <th>Price</th>
-            <!-- <th>Cars</th>  -->
-            <th>Issues</th> 
-            
-        </tr>
-        <tr th:each="part : ${parts}">
-            <td class="align-middle" th:text="${part.name}"></td>
-            <td class="align-middle" th:text="${part.domesticMarket}"></td>
-            <td class="align-middle" th:text="${part.partDescription}"></td>
-            <td class="align-middle" th:text="${part.price}"></td>
-            <td class="align-middle" th:text="${part.carsList}"></td>
-            <td class="align-middle" th:text="${part.setPart}"></td>
-        </tr>
-        <form
-                id="uploadForm"
-                method="post"
-                th:action="@{/files/upload}"
-                enctype="multipart/form-data">
-            <input id="input-file" type="file" name="file" />
-            <button class="btn btn-sm btn-outline-success float-right" type="submit">
-                Upload
-            </button>
+
+    <div id="AddIssues" class="tabcontent">
+        <form method="post" th:action="@{/admin/addIssuesToParts}">
+                <select name="partSelect" required>
+                    <option th:each="part : ${parts}"  th:value="${part.id}" th:text="${part.id} + ' ' + ${part.name}"></option>
+               </select>
+               <select name="issueSelect" multiple="multiple" required>
+                    <option th:each="issue : ${issues}" th:value="${issue.id}"
+                     th:text="${issue.id} + ' | ' + ${issue.description} + ' | ' + ${issue.solution}"></option>
+               </select>
+
+            <input type="Submit" name="Submit">
         </form>
     </div>
-      
 
 
 

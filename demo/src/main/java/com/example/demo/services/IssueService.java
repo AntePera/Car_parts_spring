@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Issues;
+import com.example.demo.entity.Parts;
 import com.example.demo.repositories.IssueRepository;
 
 @Service
@@ -14,6 +15,9 @@ public class IssueService {
     
     @Autowired
     IssueRepository repository;
+
+    @Autowired
+    PartService partService;
 
 
     public List<Issues> getAll()
@@ -29,5 +33,15 @@ public class IssueService {
     public Issues add(Issues issue)
     {
         return repository.save(issue);
+    }
+
+    public Issues addIssueToPart(int partId,int issueId)
+    {
+        Parts part = partService.getById(partId);
+        Issues issue = getById(issueId);
+        part.addIssue(issue);
+        partService.add(part);
+
+        return issue;
     }
 }

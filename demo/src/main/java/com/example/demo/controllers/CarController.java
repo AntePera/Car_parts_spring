@@ -37,6 +37,12 @@ public class CarController {
         return ResponseEntity.ok(service.add(car));
     }
 
+    @PostMapping("/parts/{partId}/cars/{carId}")
+    public ResponseEntity<Cars> addCarToParts(@PathVariable(value="partId") int partId,@PathVariable(value="carId") int carId)
+    {
+        return ResponseEntity.ok(service.addCarToParts(partId,carId));
+    }
+
 
 
 }

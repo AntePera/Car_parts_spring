@@ -36,4 +36,11 @@ public class IssueController {
     {
         return ResponseEntity.ok(service.add(issue));
     }
+
+    
+    @PostMapping("/parts/{partId}/issues/{issueId}")
+    ResponseEntity<Issues> addIssueToPart(@PathVariable(value = "partId")int partId,@PathVariable(value="issueId") int issueId)
+    {
+        return ResponseEntity.ok(service.addIssueToPart(partId,issueId));
+    }
 }

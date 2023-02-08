@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.seminar.WebApp.entities.Car;
@@ -43,6 +44,12 @@ public class AdminController {
     public RedirectView partAdded(@ModelAttribute Part part)
     {
         return service.partAdded(part);
+    }
+
+    @PostMapping("/admin/addIssuesToParts")
+    public RedirectView addIssuesToParts(@RequestParam(value="partSelect") int partSelect, @RequestParam(value="issueSelect") String issueSelect)
+    {
+        return service.addIssuesToParts(partSelect,issueSelect);
     }
 
 

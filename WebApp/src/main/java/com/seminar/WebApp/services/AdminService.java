@@ -69,4 +69,16 @@ public class AdminService {
         restTemplate.postForObject("http://localhost:8080/parts", part,Part.class);
         return new RedirectView("/admin");
     }
+
+    public RedirectView addIssuesToParts(int partSelect,String issues)
+    {
+        String[] strings = issues.split(",",0);
+        for(String issueID: strings)
+        {
+            Issue addedIssue = new Issue();
+            restTemplate.postForObject("http://localhost:8080/parts/" + partSelect + "/issues/" + issueID,addedIssue,Issue.class);
+        }
+        
+        return new RedirectView("/admin");
+    }
 }
