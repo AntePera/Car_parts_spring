@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,14 @@ public class Part {
     private String domesticMarket;
     private String partDescription;
     private double price;
+    private Image image;
     private List<Car> carsList;
     private Set<Issue>setPart;
+
+    public String showImage()
+    {
+        return Base64.getEncoder().encodeToString(this.image.getData());
+    }
+
     
 }

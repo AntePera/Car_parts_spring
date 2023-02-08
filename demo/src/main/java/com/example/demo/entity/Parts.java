@@ -2,8 +2,9 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -23,9 +25,9 @@ public class Parts {
     private String name;
     private double price;
     private String domesticMarket;
-    @OneToMany(targetEntity = Image.class,cascade = CascadeType.ALL)
-    @JoinColumn(name="pi_fk",referencedColumnName = "id")
-    private List<Image> imageList ;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="pi_fk")
+    private Image image;
     private String partDescription;
     @OneToMany(targetEntity = Cars.class,cascade = CascadeType.ALL)
     @JoinColumn(name="pc_fk",referencedColumnName = "id")
@@ -59,6 +61,7 @@ public class Parts {
         });
         carsList.add(car);
     }
+
 
 }
 

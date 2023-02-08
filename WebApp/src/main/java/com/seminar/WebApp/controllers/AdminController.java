@@ -1,5 +1,7 @@
 package com.seminar.WebApp.controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.seminar.WebApp.entities.Car;
@@ -41,9 +44,9 @@ public class AdminController {
     }
 
     @PostMapping("/admin/partAdded")
-    public RedirectView partAdded(@ModelAttribute Part part)
+    public RedirectView partAdded(@ModelAttribute Part part, @RequestParam MultipartFile img) throws IOException
     {
-        return service.partAdded(part);
+        return service.partAdded(part,img);
     }
 
     @PostMapping("/admin/addIssuesToParts")

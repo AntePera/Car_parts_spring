@@ -7,9 +7,11 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.example.demo.entity.Image;
 import com.example.demo.repositories.ImageRepository;
+
 
 @Service
 public class ImageService {
@@ -17,8 +19,8 @@ public class ImageService {
     @Autowired
     ImageRepository repository;
 
-    public List<Image> getAll()
-    {
+    public List<Image> getAll(Model m)
+    { 
         return repository.findAll();
     }
 
