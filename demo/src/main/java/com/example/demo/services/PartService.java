@@ -30,4 +30,9 @@ public class PartService {
     {
         return repository.save(part);
     }
+
+    public List<Parts> findByCarsIdAndIssuesId(int carId,int issueId)
+    {
+        return repository.findByCarsIdAndIssuesId(carId, issueId);
+    }
 }

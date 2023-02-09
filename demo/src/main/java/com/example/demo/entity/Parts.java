@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,9 +28,13 @@ public class Parts {
     @JoinColumn(name="pi_fk")
     private Image image;
     private String partDescription;
-    @OneToMany(targetEntity = Cars.class,cascade = CascadeType.ALL)
-    @JoinColumn(name="pc_fk",referencedColumnName = "id")
-    private List<Cars> carsList;
+    @ManyToMany
+    @JoinTable(name="part_cars",
+                joinColumns =@JoinColumn(name = "part_id"),
+                inverseJoinColumns =@JoinColumn(name = "car_id"))
+    @JsonIgnore
+    private Set<Cars>cars=new HashSet<>();
+
     @ManyToMany
     @JoinTable(name="parts_issues",
                 joinColumns =@JoinColumn(name = "part_id"),
@@ -53,13 +56,14 @@ public class Parts {
 
     public void addCar(Cars car)
     {
-        carsList.forEach(c -> {
+        cars.forEach(c -> {
             if(c.getId() == car.getId())
             {
                 throw new EntityExistsException("Car is already added");
             }
         });
-        carsList.add(car);
+        cars.add(car);
+        car.getParts().add(this);
     }
 
 

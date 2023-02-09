@@ -24,6 +24,8 @@ public class Part {
 
     public String showImage()
     {
+        if(image == null)
+            return null;
         return Base64.getEncoder().encodeToString(this.image.getData());
     }
 

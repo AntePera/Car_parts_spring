@@ -44,4 +44,14 @@ public class IssueService {
 
         return issue;
     }
+
+    public List<Issues> getAllIssuesByPartId(int id)
+    {
+        return repository.findByParts_Id(id);
+    }
+
+    public List<Issues> findIssuesByPartsCarsId(int id)
+    {
+        return repository.findIssuesByPartsCarsId(id);
+    }
 }

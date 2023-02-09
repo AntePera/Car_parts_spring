@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.demo.entity.Parts;
 import com.example.demo.services.PartService;
 
 @RestController
+@CrossOrigin
 public class PartController {
     
     @Autowired
@@ -35,5 +37,11 @@ public class PartController {
     public ResponseEntity<Parts> add(@RequestBody Parts part)
     {
         return ResponseEntity.ok(service.add(part));
+    }
+
+    @GetMapping("parts/cars/{carId}/issues/{issueId}")
+    public ResponseEntity<List<Parts>> findByCarsIdAndIssuesId(@PathVariable(value="carId") int carId,@PathVariable(value="issueId") int issueId)
+    {
+        return ResponseEntity.ok(service.findByCarsIdAndIssuesId(carId, issueId));
     }
 }

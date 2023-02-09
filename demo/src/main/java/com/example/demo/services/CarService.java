@@ -36,8 +36,8 @@ public class CarService {
 
     public Cars addCarToParts(int partId, int carId)
     {
-        Cars car = getById(carId);
         Parts part = partService.getById(partId);
+        Cars car = getById(carId);
         part.addCar(car);
         partService.add(part);
         return car;
