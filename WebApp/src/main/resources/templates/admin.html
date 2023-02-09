@@ -8,143 +8,209 @@
     <script src="js/admin.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin dashboard</title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
 </head>
-<body>
-    <h1>Admin dashboard</h1>
-    <a href="/">Go back</a>
-    <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Cars')">Cars</button>
-        <button class="tablinks" onclick="openTab(event, 'Issues')">Issues</button>
-        <button class="tablinks" onclick="openTab(event, 'Parts')">Parts</button>
-        <button class="tablinks" onclick="openTab(event, 'AddIssues')">Add issues to parts</button>
-    </div>
-
+<body style="background-color: #eeeeee;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin dashboard</a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            </div>
+        </div>
+    </nav>
+    <div class="row justify-content-center" style="height: 20px; background-color: #006640"></div>
+        <div class="tab">
+            <div class="row justify-content-center" style="height: 50px; background-color: #006640">
+                <div class="col-sm-1"><button onclick="window.location.href='/';" style="background-color: transparent; border: 0px; color: white">Index</button></div>
+                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Cars')" style="background-color: transparent; border: 0px; color: white">Cars</button></div>
+                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Issues')" style="background-color: transparent; border: 0px; color: white">Issues</button></div>
+                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Parts')" style="background-color: transparent; border: 0px; color: white">Parts</button></div>
+                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'AddIssues')" style="width: 150px; background-color: transparent; border: 0px; color: white">Add issues to parts</button></div>
+            </div>
+        </div>
 
 
     <div id="Cars" class="tabcontent">
-        <h3>Add new car</h3>
+        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
+            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add new car</h3></div>
+        </div>
         <form method="post" th:action="@{/admin/carAdded}" th:object="${car}">
-            <label for="manufacturer">Manufacturer:</label>
-            <input type="text" id="manufacturer" name="manufacturer" th:value="*{manufacturer}" required/><br>
-    
-            <label for="model">Model:</label>
-            <input type="text" id="model" name="model" th:value="*{model}" required/><br>
-    
-            <label for="domesticMarket">Domestic Market:</label>
-            <input type="text" id="domesticMarket" name="domesticMarket" th:value="*{domesticMarket}" required/><br>
-    
-            <label for="year">Year:</label>
-            <input type="number" id="year" name="year" th:value="*{year}" required/><br>
-    
-            <input type="Submit" name="Submit">
+            <div class="row justify-content-center"  style="height: 10px"></div>
+            <div class="row justify-content-center"  style="height: 50px">
+                    <div class="col-sm-1"><label for="manufacturer">Manufacturer:</label></div>
+                    <div class="col-sm-1"><input type="text" id="manufacturer" name="manufacturer" th:value="*{manufacturer}" required/></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="model">Model:</label></div>
+                <div class="col-sm-1"><input type="text" id="model" name="model" th:value="*{model}" required/><br></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="domesticMarket">Domestic Market:</label></div>
+                <div class="col-sm-1"><input type="text" id="domesticMarket" name="domesticMarket" th:value="*{domesticMarket}" required/><br></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="year">Year:</label></div>
+                <div class="col-sm-1"><input type="number" id="year" name="year" th:value="*{year}" required/><br></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><input type="Submit" name="Submit"></div>
+            </div>
         </form>
-        <h3 class="align-middle">Car list</h3>
-        <table>
-        <tr>
-            <th>ID</th>
-            <th>Manufacturer</th>
-            <th>Model</th>
-            <th>Domestic Market</th>
-            <th>Year</th>
-        </tr>
-        <tr th:each="car : ${cars}">
-            <td class="align-middle" th:text="${car.id}"></td>
-            <td class="align-middle" th:text="${car.manufacturer}"></td>
-            <td class="align-middle" th:text="${car.model}"></td>
-            <td class="align-middle" th:text="${car.domesticMarket}"></td>
-            <td class="align-middle" th:text="${car.year}"></td>
-        </tr>
-        </table>
+        <div class="row justify-content-center" style="height: 50px; text-align: center">
+            <div class="col-sm-2" ><h3 class="align-middle">Car list</h3></div>
+        </div>
+        <div class="row justify-content-center" style="height: 50px">
+            <div class="col-md-8 justify-content-center">
+                <table style="margin-left: auto; margin-right: auto">
+                    <tr>
+                        <th>ID</th>
+                        <th>Manufacturer</th>
+                        <th>Model</th>
+                        <th>Domestic Market</th>
+                        <th>Year</th>
+                    </tr>
+                    <tr th:each="car : ${cars}">
+                        <td class="align-middle" th:text="${car.id}"></td>
+                        <td class="align-middle" th:text="${car.manufacturer}"></td>
+                        <td class="align-middle" th:text="${car.model}"></td>
+                        <td class="align-middle" th:text="${car.domesticMarket}"></td>
+                        <td class="align-middle" th:text="${car.year}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
       
 
     
     <div id="Issues" class="tabcontent">
-        <h3>Add new issue</h3>
+        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
+            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add new issue</h3></div>
+        </div>
         <form method="post" th:action="@{/admin/issueAdded}" th:object="${issue}">
-                <label for="description">Description:</label>
-                <input type="text" id="description" name="description" th:value="*{description}" required/><br>
-        
-                <label for="solution">Solution:</label>
-                <input type="text" id="solution" name="solution" th:value="*{solution}" required/><br>
-
-        
-                <input type="Submit" name="Submit">
+            <div class="row justify-content-center"  style="height: 10px"></div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="description">Description:</label></div>
+                <div class="col-sm-1"><input type="text" id="description" name="description" th:value="*{description}" required/></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="solution">Solution:</label></div>
+                <div class="col-sm-1"><input type="text" id="solution" name="solution" th:value="*{solution}" required/></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><input type="Submit" name="Submit"></div>
+            </div>
         </form>
-        <h3 class="align-middle">Issue list</h3>
-        <table>
-        <tr>
-            <th>ID</th>
-            <th>Description</th>
-            <th>Solution</th>
-        </tr>
-        <tr th:each="issue : ${issues}">
-            <td class="align-middle" th:text="${issue.id}"></td>
-            <td class="align-middle" th:text="${issue.description}"></td>
-            <td class="align-middle" th:text="${issue.solution}"></td>
-        </tr>
-        </table>
+        <div class="row justify-content-center" style="height: 50px">
+            <div class="col-sm-2" style="text-align: center"><h3 class="align-middle">Issue list</h3></div>
+        </div>
+        <div class="row justify-content-center" style="height: 50px">
+            <div class="col-md-8 justify-content-center">
+                <table style="margin-left: auto; margin-right: auto">
+                <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Solution</th>
+                </tr>
+                <tr th:each="issue : ${issues}">
+                    <td class="align-middle" th:text="${issue.id}"></td>
+                    <td class="align-middle" th:text="${issue.description}"></td>
+                    <td class="align-middle" th:text="${issue.solution}"></td>
+                </tr>
+                </table>
+            </div>
+        </div>
     </div>
 
 
 
     <div id="Parts" class="tabcontent">
-        <h3>Add new part</h3>
+        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
+            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add new part</h3></div>
+        </div>
+        <div class="row justify-content-center"  style="height: 10px"></div>
         <form method="post" th:action="@{/admin/partAdded}" enctype="multipart/form-data" th:object="${part}">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" th:value="*{name}" required/><br>
-    
-            <label for="domesticMarket">Domestic Market:</label>
-            <input type="text" id="domesticMarket" name="domesticMarket" th:value="*{domesticMarket}" required/><br>
-
-            <label for="partDescription">Part Description:</label>
-            <input type="text" id="partDescription" name="partDescription" th:value="*{partDescription}" required/><br>
-
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" th:value="*{price}" required/><br>
-
-            <input type="file" name="img" class="form-control">
-
-    
-            <input type="Submit" name="Submit">
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="name">Name:</label></div>
+                <div class="col-sm-1"><input type="text" id="name" name="name" th:value="*{name}" required/></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="domesticMarket">Domestic Market:</label></div>
+                <div class="col-sm-1"><input type="text" id="domesticMarket" name="domesticMarket" th:value="*{domesticMarket}" required/></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="partDescription">Part Description:</label></div>
+                <div class="col-sm-1"><input type="text" id="partDescription" name="partDescription" th:value="*{partDescription}" required/></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><label for="price">Price:</label></div>
+                <div class="col-sm-1"><input type="number" id="price" name="price" th:value="*{price}" required/><br></div>
+            </div>
+            <div class="row justify-content-center" style="height: 50px">
+                <div class="col-sm-1"><input type="file" name="img" class="form-control"></div>
+                <div class="col-sm-1"><input type="Submit" name="Submit"></div>
+            </div>
         </form>
-        <h3 class="align-middle">Issue list</h3>
-        <table>
-            <tr>
-                <th>Image</th>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Domestic Market</th>
-                <th>Image</th>
-                <th>Part description</th>
-                <th>Price</th> 
-                
-            </tr>
-            <tr th:each="part : ${parts}">
-                <td class="align-middle">
-                    <img alt="" th:src="@{'data:image/jpeg;base64,'+${part.showImage()}}" width="100%" height="100">
-                </td>
-                <td class="align-middle" th:text="${part.id}"></td>
-                <td class="align-middle" th:text="${part.name}"></td>
-                <td class="align-middle" th:text="${part.domesticMarket}"></td>
-                <td class="align-middle" th:text="${part.partDescription}"></td>
-                <td class="align-middle" th:text="${part.price}"></td>
-            </tr>
-        </table>
+        <div class="row justify-content-center" style="height: 50px">
+            <div class="col-sm-2" style="text-align: center"><h3 class="align-middle">Part list</h3></div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <table style="margin-right: auto; margin-left: auto">
+                    <tr>
+                        <th>Image</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Domestic Market</th>
+                        <th>Image</th>
+                        <th>Part description</th>
+                        <th>Price</th>
+
+                    </tr>
+                    <tr th:each="part : ${parts}">
+                        <td class="align-middle">
+                            <img alt="" th:src="@{'data:image/jpeg;base64,'+${part.showImage()}}" width="100%" height="100">
+                        </td>
+                        <td class="align-middle" th:text="${part.id}"></td>
+                        <td class="align-middle" th:text="${part.name}"></td>
+                        <td class="align-middle" th:text="${part.domesticMarket}"></td>
+                        <td class="align-middle" th:text="${part.partDescription}"></td>
+                        <td class="align-middle" th:text="${part.price}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 
 
     <div id="AddIssues" class="tabcontent">
+        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
+            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add issues to parts</h3></div>
+        </div>
         <form method="post" th:action="@{/admin/addIssuesToParts}">
-                <select name="partSelect" required>
+            <div class="row justify-content-center">
+                <div class="col-sm-3"><select name="partSelect" required>
                     <option th:each="part : ${parts}"  th:value="${part.id}" th:text="${part.id} + ' ' + ${part.name}"></option>
-               </select>
-               <select name="issueSelect" multiple="multiple" required>
+                </select></div>
+                <div class="col-sm-3"><select name="issueSelect" multiple="multiple" required>
                     <option th:each="issue : ${issues}" th:value="${issue.id}"
                      th:text="${issue.id} + ' | ' + ${issue.description} + ' | ' + ${issue.solution}"></option>
-               </select>
-
-            <input type="Submit" name="Submit">
+                </select></div>
+                <div class="col-sm-3">
+                    <input type="Submit" name="Submit">
+                </div>
+            </div>
         </form>
     </div>
 
