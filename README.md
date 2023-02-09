@@ -6,7 +6,7 @@
 ## Features
 
 ### Users
- * Roles: admin,member,guest
+ * Roles: admin,member
  * Registration and login form
 ### Security
  * Password encryption
