@@ -19,11 +19,12 @@ public class Users {
     private String lastName;
     private String email;
     private String password;
-    @ManyToMany
-    @JoinTable(name="parts_users",
-            joinColumns =@JoinColumn(name = "part_id"),
-            inverseJoinColumns =@JoinColumn(name = "user_id"))
-    private List<Parts> orderList;
+    @OneToMany(targetEntity = Order.class,cascade = CascadeType.ALL)
+    @JoinColumn(name="uo_fk",referencedColumnName = "id")
+    private List<Order> orderList;
+    //@OneToOne(targetEntity = Roles.class,cascade = CascadeType.ALL)
+    //@JoinColumn(name="ur_fk",referencedColumnName = "id")
+    //private int roleid;
     private String role;
 
 }

@@ -31,7 +31,6 @@ public class AdminService {
         model.addAttribute("issue", new Issue());
         model.addAttribute("part", new Part());
 
-
         ResponseEntity<List<Part>> partsResponse = restTemplate.exchange("http://localhost:8080/parts",
         HttpMethod.GET,
         null,
@@ -52,8 +51,74 @@ public class AdminService {
         model.addAttribute("cars",cars);
         model.addAttribute("issues",issues);
         model.addAttribute("parts",parts);
+
         return "admin";
     }
+
+    public String carsList(int pageNo, int pageSize, String sort, Model model)
+    {
+        pageNo = pageNo < 0 ? 0 : pageNo;
+        pageSize = pageSize < 1 ? 1 : pageSize;
+        sort = sort == null ? "id" : sort;
+        ResponseEntity<List<Car>> carsResponse = restTemplate.exchange("http://localhost:8080/carspage?pageNo="+pageNo+
+        "&pageSize="+pageSize+"&sort="+sort,
+        HttpMethod.GET,
+        null,
+        new ParameterizedTypeReference<List<Car>>(){});
+        List<Car> cars = carsResponse.getBody();
+        model.addAttribute("cars",cars);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("sort", sort);
+
+
+        return "cars";
+    }
+
+    public String issueList(int pageNo, int pageSize, String sort, Model model)
+    {
+        pageNo = pageNo <= 0 ? 0 : pageNo;
+        pageSize = pageSize <= 1 ? 1 : pageSize;
+        sort = sort == null ? "id" : sort;
+        ResponseEntity<List<Issue>> issueResponse = restTemplate.exchange("http://localhost:8080/issuespage?pageNo="+pageNo+
+        "&pageSize="+pageSize+"&sort="+sort,
+        HttpMethod.GET,
+        null,
+        new ParameterizedTypeReference<List<Issue>>(){});
+        List<Issue> issues = issueResponse.getBody();
+        model.addAttribute("issues",issues);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("sort", sort);
+
+
+        return "issues";
+    }
+
+    public String partList(int pageNo, int pageSize, String sort, Model model)
+    {
+        pageNo = pageNo <= 0 ? 0 : pageNo;
+        pageSize = pageSize <= 1 ? 1 : pageSize;
+        sort = sort == null ? "id" : sort;
+        ResponseEntity<List<Part>> partResponse = restTemplate.exchange("http://localhost:8080/partspage?pageNo="+pageNo+
+        "&pageSize="+pageSize+"&sort="+sort,
+        HttpMethod.GET,
+        null,
+        new ParameterizedTypeReference<List<Part>>(){});
+        List<Part> parts = partResponse.getBody();
+
+        model.addAttribute("parts",parts);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("sort", sort);
+
+
+        return "parts";
+    }
+
+
+
+
 
     public RedirectView carAdded(Car car)
     {

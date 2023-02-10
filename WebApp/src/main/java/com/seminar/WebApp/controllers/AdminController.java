@@ -31,6 +31,32 @@ public class AdminController {
         return service.admin(model);
     }
 
+    @GetMapping(value = "/admin/cars")
+    public String carsList(@RequestParam(value="pageNo") int pageNo,
+    @RequestParam(value="pageSize") int pageSize, Model model,
+    @RequestParam(value="sort") String sort)
+    {
+        return service.carsList(pageNo, pageSize, sort, model);
+    }
+
+    @GetMapping(value = "/admin/issues")
+    public String issueList(@RequestParam(value="pageNo") int pageNo,
+    @RequestParam(value="pageSize") int pageSize, Model model,
+    @RequestParam(value="sort") String sort)
+    {
+        return service.issueList(pageNo, pageSize, sort, model);
+    }
+
+    @GetMapping(value = "/admin/parts")
+    public String partList(@RequestParam(value="pageNo") int pageNo,
+    @RequestParam(value="pageSize") int pageSize, Model model,
+    @RequestParam(value="sort") String sort)
+    {
+        return service.partList(pageNo, pageSize, sort, model);
+    }
+
+
+
     @PostMapping("/admin/carAdded")
     public RedirectView carAdded(@ModelAttribute Car car)
     {

@@ -5,6 +5,10 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.example.demo.entity.Cars;
 import com.example.demo.entity.Parts;
@@ -41,6 +45,14 @@ public class CarService {
         part.addCar(car);
         partService.add(part);
         return car;
+    }
+
+
+    public List<Cars> carsPage(int pageNo, int pageSize, String sort)
+    {
+        Pageable pageable = PageRequest.of(pageNo, pageSize,Sort.by(sort));
+        Page<Cars> page = repository.findAll(pageable);
+        return page.getContent();
     }
 
 }

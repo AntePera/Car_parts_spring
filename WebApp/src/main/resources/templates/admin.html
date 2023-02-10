@@ -42,6 +42,7 @@
 
 
     <div id="Cars" class="tabcontent">
+
         <div class="row justify-content-center" style="height: 50px; background-color: #005533">
             <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add new car</h3></div>
         </div>
@@ -67,32 +68,26 @@
                 <div class="col-sm-1"><input type="Submit" name="Submit"></div>
             </div>
         </form>
-        <div class="row justify-content-center" style="height: 50px; text-align: center">
-            <div class="col-sm-2" ><h3 class="align-middle">Car list</h3></div>
-        </div>
         <div class="row justify-content-center" style="height: 50px">
-            <div class="col-md-8 justify-content-center">
-                <table style="margin-left: auto; margin-right: auto">
-                    <tr>
-                        <th>ID</th>
-                        <th>Manufacturer</th>
-                        <th>Model</th>
-                        <th>Domestic Market</th>
-                        <th>Year</th>
-                    </tr>
-                    <tr th:each="car : ${cars}">
-                        <td class="align-middle" th:text="${car.id}"></td>
-                        <td class="align-middle" th:text="${car.manufacturer}"></td>
-                        <td class="align-middle" th:text="${car.model}"></td>
-                        <td class="align-middle" th:text="${car.domesticMarket}"></td>
-                        <td class="align-middle" th:text="${car.year}"></td>
-                    </tr>
-                </table>
-            </div>
+        <form class="row justify-content-center" method="get" th:action="@{/admin/cars}">
+            <label class="col-sm-1" for="pageNo">Page number:</label>
+            <input class="col-sm-1" type="number" name="pageNo" value="0" min="0">
+            <label class="col-sm-1" for="pageSize">Page size:</label>
+            <input class="col-sm-1" type="number" name="pageSize" value="1" min="1">
+            <label class="col-sm-1" for="sort">Sort By:</label>
+            <select class="col-sm-1" name="sort">
+                <option name="id">id</option>
+                <option name="manufacturer">manufacturer</option>
+                <option name="model">model</option>
+                <option name="domesticMarket">domesticMarket</option>
+                <option name="year">year</option>
+            </select>
+            <input class="col-sm-1" type="Submit" name="Submit" value="Go to car list">
+        </form>
         </div>
     </div>
-      
-
+    
+    
     
     <div id="Issues" class="tabcontent">
         <div class="row justify-content-center" style="height: 50px; background-color: #005533">
@@ -112,25 +107,21 @@
                 <div class="col-sm-1"><input type="Submit" name="Submit"></div>
             </div>
         </form>
-        <div class="row justify-content-center" style="height: 50px">
-            <div class="col-sm-2" style="text-align: center"><h3 class="align-middle">Issue list</h3></div>
-        </div>
-        <div class="row justify-content-center" style="height: 50px">
-            <div class="col-md-8 justify-content-center">
-                <table style="margin-left: auto; margin-right: auto">
-                <tr>
-                    <th>ID</th>
-                    <th>Description</th>
-                    <th>Solution</th>
-                </tr>
-                <tr th:each="issue : ${issues}">
-                    <td class="align-middle" th:text="${issue.id}"></td>
-                    <td class="align-middle" th:text="${issue.description}"></td>
-                    <td class="align-middle" th:text="${issue.solution}"></td>
-                </tr>
-                </table>
-            </div>
-        </div>
+        <div class="row justify-content-center" style="height: 50px"></div>
+        <form class="row justify-content-center" method="get" th:action="@{/admin/issues}">
+            <label class="col-sm-1" for="pageNo">Page number:</label>
+            <input class="col-sm-1" type="number" name="pageNo" value="0" min="0">
+            <label class="col-sm-1" for="pageSize">Page size:</label>
+            <input class="col-sm-1" type="number" name="pageSize" value="1" min="1">
+            <label class="col-sm-1" for="sort">Sort By:</label>
+            <select class="col-sm-1" name="sort">
+                <option name="id">id</option>
+                <option name="description">description</option>
+                <option name="solution">solution</option>
+            </select>
+            <input class="col-sm-1" type="Submit" name="Submit" value="Go to issue list">
+        </form>
+    </div>
     </div>
 
 
@@ -162,35 +153,24 @@
                 <div class="col-sm-1"><input type="Submit" name="Submit"></div>
             </div>
         </form>
-        <div class="row justify-content-center" style="height: 50px">
-            <div class="col-sm-2" style="text-align: center"><h3 class="align-middle">Part list</h3></div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-sm-6">
-                <table style="margin-right: auto; margin-left: auto">
-                    <tr>
-                        <th>Image</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Domestic Market</th>
-                        <th>Part description</th>
-                        <th>Price</th>
-
-                    </tr>
-                    <tr th:each="part : ${parts}">
-                        <td class="align-middle">
-                            <img alt="" th:src="@{'data:image/jpeg;base64,'+${part.showImage()}}" width="100%" height="100">
-                        </td>
-                        <td class="align-middle" th:text="${part.id}"></td>
-                        <td class="align-middle" th:text="${part.name}"></td>
-                        <td class="align-middle" th:text="${part.domesticMarket}"></td>
-                        <td class="align-middle" th:text="${part.partDescription}"></td>
-                        <td class="align-middle" th:text="${part.price}"></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <div class="row justify-content-center col-sm-1" style="height: 50px"></div>
+        <form class="row justify-content-center" method="get" th:action="@{/admin/parts}">
+            <label class="col-sm-1" for="pageNo">Page number:</label>
+            <input class="col-sm-1" type="number" name="pageNo" value="0" min="0">
+            <label class="col-sm-1" for="pageSize">Page size:</label>
+            <input class="col-sm-1" type="number" name="pageSize" value="1" min="1">
+            <label class="col-sm-1" for="sort">Sort By:</label>
+            <select class="col-sm-1" name="sort">
+                <option name="id">id</option>
+                <option name="name">name</option>
+                <option name="domesticMarket">domesticMarket</option>
+                <option name="partDescription">partDescription</option>
+                <option name="price">price</option>
+            </select>
+            <input class="col-sm-1" type="Submit" name="Submit" value="Go to part list">
+        </form>
+    </div>
+        
     </div>
 
 
