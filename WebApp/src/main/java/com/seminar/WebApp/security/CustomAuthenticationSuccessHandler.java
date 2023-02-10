@@ -24,7 +24,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         if (userDetails.hasRole("admin")) {
             redirectURL = "/admin";
         } else if (userDetails.hasRole("user")) {
-            redirectURL = "/user";
+            redirectURL = "/app";
         } else {
             redirectURL = "/";
         }

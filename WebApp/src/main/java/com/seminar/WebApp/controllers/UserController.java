@@ -13,7 +13,7 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @GetMapping("/user")
+    @GetMapping("/app")
     public String appPage(Model model)
     {
         return service.appPage(model);

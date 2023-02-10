@@ -83,7 +83,33 @@ public class AdminService {
         for(String issueID: strings)
         {
             Issue addedIssue = new Issue();
+            try
+            {
             restTemplate.postForObject("http://localhost:8080/parts/" + partSelect + "/issues/" + issueID,addedIssue,Issue.class);
+            }
+            catch(Exception e)
+            {
+                continue;
+            }
+        }
+        
+        return new RedirectView("/admin");
+    }
+
+    public RedirectView addCarsToParts(int partSelect,String cars)
+    {
+        String[] strings = cars.split(",",0);
+        for(String carID: strings)
+        {
+            Car addedCar = new Car();
+            try
+            {
+                restTemplate.postForObject("http://localhost:8080/parts/" + partSelect + "/cars/" + carID,addedCar, Car.class);
+            }
+            catch(Exception e)
+            {
+                continue;
+            }
         }
         
         return new RedirectView("/admin");

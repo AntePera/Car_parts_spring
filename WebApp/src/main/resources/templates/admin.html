@@ -36,6 +36,7 @@
                 <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Issues')" style="background-color: transparent; border: 0px; color: white">Issues</button></div>
                 <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Parts')" style="background-color: transparent; border: 0px; color: white">Parts</button></div>
                 <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'AddIssues')" style="width: 150px; background-color: transparent; border: 0px; color: white">Add issues to parts</button></div>
+                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'AddCars')" style="width: 150px; background-color: transparent; border: 0px; color: white">Add cars to parts</button></div>
             </div>
         </div>
 
@@ -206,6 +207,26 @@
                 <div class="col-sm-3"><select name="issueSelect" multiple="multiple" required>
                     <option th:each="issue : ${issues}" th:value="${issue.id}"
                      th:text="${issue.id} + ' | ' + ${issue.description} + ' | ' + ${issue.solution}"></option>
+                </select></div>
+                <div class="col-sm-3">
+                    <input type="Submit" name="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="AddCars" class="tabcontent">
+        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
+            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add issues to parts</h3></div>
+        </div>
+        <form method="post" th:action="@{/admin/addCarsToParts}">
+            <div class="row justify-content-center">
+                <div class="col-sm-3"><select name="partSelect" required>
+                    <option th:each="part : ${parts}"  th:value="${part.id}" th:text="${part.id} + ' ' + ${part.name}"></option>
+                </select></div>
+                <div class="col-sm-3"><select name="carSelect" multiple="multiple" required>
+                    <option th:each="car : ${cars}" th:value="${car.id}"
+                     th:text="${car.id} + ' | ' + ${car.manufacturer} + ' | ' + ${car.model} + ' | ' + ${car.domesticMarket} + ' | ' + ${car.year}"></option>
                 </select></div>
                 <div class="col-sm-3">
                     <input type="Submit" name="Submit">

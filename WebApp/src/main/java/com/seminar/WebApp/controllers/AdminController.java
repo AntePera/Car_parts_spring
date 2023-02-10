@@ -55,5 +55,11 @@ public class AdminController {
         return service.addIssuesToParts(partSelect,issueSelect);
     }
 
+    @PostMapping("/admin/addCarsToParts")
+    public RedirectView addCarsToParts(@RequestParam(value="partSelect") int partSelect, @RequestParam(value="carSelect") String carSelect)
+    {
+        return service.addCarsToParts(partSelect,carSelect);
+    }
+
 
 }
