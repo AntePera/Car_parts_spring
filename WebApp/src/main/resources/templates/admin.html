@@ -29,21 +29,21 @@
         </div>
     </nav>
     <div class="row justify-content-center" style="height: 20px; background-color: #006640"></div>
-        <div class="tab">
+
             <div class="row justify-content-center" style="height: 50px; background-color: #006640">
                 <div class="col-sm-1"><button onclick="window.location.href='/';" style="background-color: transparent; border: 0px; color: white">Index</button></div>
-                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Cars')" style="background-color: transparent; border: 0px; color: white">Cars</button></div>
-                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Issues')" style="background-color: transparent; border: 0px; color: white">Issues</button></div>
-                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'Parts')" style="background-color: transparent; border: 0px; color: white">Parts</button></div>
-                <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'AddIssues')" style="width: 150px; background-color: transparent; border: 0px; color: white">Add issues to parts</button></div>
+                <div class="col-sm-1"><button onclick="window.location.href='/admin/cars/1';" style="background-color: transparent; border: 0px; color: white">Cars</button></div>
+                <div class="col-sm-1"><button onclick="window.location.href='/admin/issues/1';" style="background-color: transparent; border: 0px; color: white">Issues</button></div>
+                <div class="col-sm-1"><button onclick="window.location.href='/admin/parts/1';" style="background-color: transparent; border: 0px; color: white">Parts</button></div>
+                <div class="col-sm-2"><button class="tablinks" onclick="openTab(event, 'AddIssues')" style="width: 150px; background-color: transparent; border: 0px; color: white">Add issues to parts</button></div>
                 <div class="col-sm-1"><button class="tablinks" onclick="openTab(event, 'AddCars')" style="width: 150px; background-color: transparent; border: 0px; color: white">Add cars to parts</button></div>
             </div>
-        </div>
+
 
 
     <div id="Cars" class="tabcontent">
-        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
-            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add new car</h3></div>
+        <div class="row justify-content-center" style="height: 50px">
+            <div class="col-sm-3" style="text-align: center"><h3>Add new car</h3></div>
         </div>
         <form method="post" th:action="@{/admin/carAdded}" th:object="${car}">
             <div class="row justify-content-center"  style="height: 10px"></div>
@@ -88,6 +88,11 @@
                         <td class="align-middle" th:text="${car.year}"></td>
                     </tr>
                 </table>
+                <table style="margin-left: auto; margin-right: auto">
+                    <tr>
+                        <th th:each="li: ${list}"><button onclick="window.location.href='/';" th:text="${li}"></button></th>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -95,8 +100,8 @@
 
     
     <div id="Issues" class="tabcontent">
-        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
-            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add new issue</h3></div>
+        <div class="row justify-content-center" style="height: 50px">
+            <div class="col-sm-3" style="text-align: center"><h3>Add new issue</h3></div>
         </div>
         <form method="post" th:action="@{/admin/issueAdded}" th:object="${issue}">
             <div class="row justify-content-center"  style="height: 10px"></div>
@@ -136,8 +141,8 @@
 
 
     <div id="Parts" class="tabcontent">
-        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
-            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add new part</h3></div>
+        <div class="row justify-content-center" style="height: 50px;">
+            <div class="col-sm-3" style="text-align: center"><h3>Add new part</h3></div>
         </div>
         <div class="row justify-content-center"  style="height: 10px"></div>
         <form method="post" th:action="@{/admin/partAdded}" enctype="multipart/form-data" th:object="${part}">
@@ -196,8 +201,8 @@
 
 
     <div id="AddIssues" class="tabcontent">
-        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
-            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add issues to parts</h3></div>
+        <div class="row justify-content-center" style="height: 50px;">
+            <div class="col-sm-3" style="text-align: center"><h3>Add issues to parts</h3></div>
         </div>
         <form method="post" th:action="@{/admin/addIssuesToParts}">
             <div class="row justify-content-center">
@@ -216,23 +221,7 @@
     </div>
 
     <div id="AddCars" class="tabcontent">
-        <div class="row justify-content-center" style="height: 50px; background-color: #005533">
-            <div class="col-sm-3" style="text-align: center"><h3 style="color: white">Add issues to parts</h3></div>
-        </div>
-        <form method="post" th:action="@{/admin/addCarsToParts}">
-            <div class="row justify-content-center">
-                <div class="col-sm-3"><select name="partSelect" required>
-                    <option th:each="part : ${parts}"  th:value="${part.id}" th:text="${part.id} + ' ' + ${part.name}"></option>
-                </select></div>
-                <div class="col-sm-3"><select name="carSelect" multiple="multiple" required>
-                    <option th:each="car : ${cars}" th:value="${car.id}"
-                     th:text="${car.id} + ' | ' + ${car.manufacturer} + ' | ' + ${car.model} + ' | ' + ${car.domesticMarket} + ' | ' + ${car.year}"></option>
-                </select></div>
-                <div class="col-sm-3">
-                    <input type="Submit" name="Submit">
-                </div>
-            </div>
-        </form>
+
     </div>
 
 

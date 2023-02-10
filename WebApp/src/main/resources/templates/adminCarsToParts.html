@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/admin.css">
+  <script src="js/admin.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin dashboard</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body style="background-color: #eeeeee;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Admin dashboard</a>
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    </div>
+  </div>
+</nav>
+<div class="row justify-content-center" style="height: 20px; background-color: #006640"></div>
+
+<div class="row justify-content-center" style="height: 50px; background-color: #006640">
+  <div class="col-sm-1"><button onclick="window.location.href='/';" style="background-color: transparent; border: 0px; color: white">Index</button></div>
+  <div class="col-sm-1"><button onclick="window.location.href='/admin/cars/1';" style="background-color: transparent; border: 0px; color: white">Cars</button></div>
+  <div class="col-sm-1"><button onclick="window.location.href='/admin/issues/1';" style="background-color: transparent; border: 0px; color: white">Issues</button></div>
+  <div class="col-sm-1"><button onclick="window.location.href='/admin/parts/1';" style="background-color: transparent; border: 0px; color: white">Parts</button></div>
+  <div class="col-sm-2"><button onclick="window.location.href='/admin/issuesToParts';" style="width: 150px; background-color: transparent; border: 0px; color: white">Add issues to parts</button></div>
+  <div class="col-sm-1"><button onclick="window.location.href='/admin/carsToParts';" style="width: 150px; background-color: transparent; border: 0px; color: white">Add cars to parts</button></div>
+</div>
+
+<div class="row justify-content-center" style="height: 50px;">
+  <div class="col-sm-3" style="text-align: center"><h3>Add issues to parts</h3></div>
+</div>
+<form method="post" th:action="@{/admin/addCarsToParts}">
+  <div class="row justify-content-center">
+    <div class="col-sm-3"><select name="partSelect" required>
+      <option th:each="part : ${parts}"  th:value="${part.id}" th:text="${part.id} + ' ' + ${part.name}"></option>
+    </select></div>
+    <div class="col-sm-3"><select name="carSelect" multiple="multiple" required>
+      <option th:each="car : ${cars}" th:value="${car.id}"
+              th:text="${car.id} + ' | ' + ${car.manufacturer} + ' | ' + ${car.model} + ' | ' + ${car.domesticMarket} + ' | ' + ${car.year}"></option>
+    </select></div>
+    <div class="col-sm-3">
+      <input type="Submit" name="Submit">
+    </div>
+  </div>
+</form>
+
+</body>
+</html>

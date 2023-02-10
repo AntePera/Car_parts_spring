@@ -32,7 +32,7 @@
         <div class="col-sm-1" style="text-align: center; font-size: 20px"><a href="/register" class="btn btn-primary">Register</a><br></div>
     </div>
     <div th:if="${role == 'admin'}" class="row justify-content-center" style="height: 50px">
-        <div class="col-sm-1" style="text-align: center; font-size: 20px"><a href="/admin" class="btn btn-primary">Admin dashboard</a></div>
+        <div class="col-sm-1" style="text-align: center; font-size: 20px"><a href="/admin/cars/1" class="btn btn-primary">Admin dashboard</a></div>
     </div>
     <div th:if="${role == 'admin' OR role == 'user'}" class="row justify-content-center mt-4" style="height: 50px">
         <div class="col-sm-1" style="text-align: center; font-size: 20px"><a href="/app" class="btn btn-primary">Application</a><br></div>

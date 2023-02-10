@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -25,11 +22,20 @@ public class AdminController {
     @Autowired
     AdminService service;
 
-    @GetMapping("/admin")
-    public String admin(Model model)
-    {
-        return service.admin(model);
-    }
+    @GetMapping("/admin/cars/{page}")
+    public String adminCars(Model model, @PathVariable("page") int page) { return service.adminCars(model, page); }
+
+    @GetMapping("/admin/parts/{page}")
+    public String adminParts(Model model, @PathVariable("page") int page) { return service.adminParts(model, page); }
+
+    @GetMapping("/admin/issues/{page}")
+    public String adminIssues(Model model, @PathVariable("page") int page) { return service.adminIssues(model, page); }
+
+    @GetMapping("/admin/issuesToParts")
+    public String adminIssuesToParts(Model model) { return service.adminIssuesToParts(model); }
+
+    @GetMapping("/admin/carsToParts")
+    public String adminCarsToParts(Model model) { return service.adminCarsToParts(model); }
 
     @PostMapping("/admin/carAdded")
     public RedirectView carAdded(@ModelAttribute Car car)

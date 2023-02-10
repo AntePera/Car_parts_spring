@@ -22,7 +22,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         String redirectURL = request.getContextPath();
          
         if (userDetails.hasRole("admin")) {
-            redirectURL = "/admin";
+            redirectURL = "/admin/cars/1";
         } else if (userDetails.hasRole("user")) {
             redirectURL = "/app";
         } else {
