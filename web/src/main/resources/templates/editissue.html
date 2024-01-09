@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Issue</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Edit Issue</h1>
+  <form th:action="@{/issues/{issuesId}/edit(issuesId=${issue.id})}" th:object="${issue}" method="post">
+    <div class="form-group">
+      <input type="hidden" th:field="*{id}">
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" rows="4" th:utext="${issue.description}" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="parts">Part:</label>
+      <select class="form-control" id="parts" name="parts" required>
+        <option th:each="part : ${parts}" th:value="${part.id}" th:text="${part.name}"></option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+  </form>
+</div>
+</body>
+</html>

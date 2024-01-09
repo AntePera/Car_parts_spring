@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Car</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Edit Car</h1>
+  <form role="form" th:action="@{/cars/{carId}/edit(carId=${car.id})}" th:object="${car}" method="post">
+    <div class="form-group">
+      <label for="manufacturer">Manufacturer:</label>
+      <select class="form-control" id="manufacturer" name="manufacturer" th:field="*{manufacturer.id}" required>
+        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}" th:text="${manufacturer.name}"></option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="model">Model:</label>
+      <input type="text" class="form-control" id="model" name="model" th:field="*{model}" required>
+    </div>
+
+    <div class="form-group">
+      <label for="domestic_market">Domestic Market:</label>
+      <select class="form-control" id="domestic_market" name="domestic_market" th:field="*{domestic_market}" required>
+        <option value="USA">USA</option>
+        <option value="Europe">Europe</option>
+        <option value="Asia">Asia</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="year">Year:</label>
+      <input type="number" class="form-control" id="year" name="year" th:value="*{year}" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Edit</button>
+  </form>
+</div>
+</body>
+</html>

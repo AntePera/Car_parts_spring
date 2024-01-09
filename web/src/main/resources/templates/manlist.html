@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List of Manufacturers</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/cars}">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/manufacturers}">Manufacturers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/parts}">Parts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/issues}">Issues</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/solutions}">Solutions</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<body>
+
+<body>
+
+<div class="container my-2">
+  <h1>List of Manufacturers</h1>
+  <br>
+  <a th:href="@{/manufacturers/new}" >Add a Car</a>
+  <br>
+  <div>
+    <form th:action="@{/manufacturers/search}" class="form-inline my-2 my-lg-0 mb-3">
+      <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search manufacturers" aria-label="search">
+    </form>
+  </div>
+  <br>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="manufacturer : ${manufacturers}">
+      <td>
+        <a th:href="@{/manufacturers/{manufacturerId}/edit(manufacturerId=${manufacturer.id})}"
+           th:text="${manufacturer.name}">Manufacturer Name</a>
+      </td>
+      <td><a th:href="@{/manufacturers/{manufacturerId}/delete(manufacturerId=${manufacturer.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div th:if="${totalPages > 1}">
+    <div class="row col-sm-10">
+      <div class="col-sm-2">
+        Total Rows: [[${totalItems}]]
+      </div>
+      <div class="col-sm-1">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+      <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                    </span>
+      </div>
+      <div class="col-sm-1">
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+      </div>
+
+      <div class="col-sm-1">
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+        <span th:unless="${currentPage < totalPages}">Last</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

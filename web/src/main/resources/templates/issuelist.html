@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>List of Issues</title>
+
+  <!-- Include Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/cars}">Cars</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/manufacturers}">Manufacturers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/parts}">Parts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/issues}">Issues</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/solutions}">Solutions</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<body>
+<div class="container mt-4">
+  <h1>List of Issues</h1>
+  <br>
+  <a th:href="@{/issues/new}" >Add an Issue</a>
+  <br>
+  <div>
+    <form th:action="@{/issues/search}" class="form-inline my-2 my-lg-0 mb-3">
+      <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search issues" aria-label="search">
+    </form>
+  </div>
+  <br>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of issues and display each one -->
+    <tr th:each="issue : ${issues}">
+      <td><a th:href="@{/issues/{issuesId}/edit(issuesId=${issue.id})}"
+                                            th:text="${issue.description}"></a></td>
+
+      <td><a th:href="@{/issues/{issueId}(issueId=${issue.id})}">See solutions</a></td>
+
+      <td><a th:href="@{/issues/{issueId}/delete(issueId=${issue.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

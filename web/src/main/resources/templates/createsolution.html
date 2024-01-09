@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Manufacturer</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Create Solution</h1>
+  <form th:action="@{/solutions/new}" th:object="${solution}" method="post">
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" id="description" name="description" required>
+    </div>
+    <div class="form-group">
+      <label for="issue">Issue:</label>
+      <select class="form-control" id="issue" name="issue" required>
+        <option th:each="issue : ${issues}" th:value="${issue.id}" th:text="${issue.description}"></option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
+</body>
+</html>

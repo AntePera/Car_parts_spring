@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Manufacturer</title>
+  <!-- Include Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Edit Manufacturer</h1>
+  <form th:action="@{/manufacturers/{manufacturerId}/edit(manufacturerId=${manufacturer.id})}" th:object="${manufacturer}" method="post">
+    <div class="form-group">
+      <input type="hidden" th:field="*{id}">
+    </div>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" th:value="${manufacturer.name}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+  </form>
+</div>
+</body>
+</html>
